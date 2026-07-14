@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Controller
 public class RegisterController {
 	
-	@Autowired
-	private RegisterRepository registerRepository;
+	//@Autowired
+	//private RegisterRepository registerRepository;
 
     // Show registration form
     @GetMapping("/register")
@@ -25,7 +25,7 @@ public class RegisterController {
     @PostMapping("/register")
     public String processRegister(@ModelAttribute Register register) {
 
-        registerRepository.save(register);
+        //registerRepository.save(register);
 
         return "redirect:/login";
     }
