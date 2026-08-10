@@ -34,9 +34,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install Heroku CLI
+        run: npm install -g heroku
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.14.15
