@@ -6,36 +6,60 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class JournalEntryController 
 {
+	private static final Logger logger =
+	        LoggerFactory.getLogger(JournalEntryController.class);
+	
 	//@Autowired
 	//private JournalRepository journalRepository;
 	//Show new entry form
-    @GetMapping("/new-entry")
-    public String showNewEntryForm(Model model) 
-    {
+	@GetMapping("/new-entry")
+	public String showNewEntryForm(Model model)
+	{
 
-        
-        model.addAttribute("entry", new JournalEntry());
+	    logger.info("Entering JournalEntryController.showNewEntryForm()");
 
-        return "newentry";
-    }
-    	@GetMapping("/viewentries")
-    	public String showViewEntries() 
-    	{
-    		return "viewentries";
-    	}
+	    model.addAttribute("entry", new JournalEntry());
+
+	    logger.info("Exiting JournalEntryController.showNewEntryForm()");
+
+	    return "newentry";
+	}
+	@GetMapping("/viewentries")
+	public String showViewEntries()
+	{
+
+	    logger.info("Entering JournalEntryController.showViewEntries()");
+
+	    logger.info("Exiting JournalEntryController.showViewEntries()");
+
+	    return "viewentries";
+	}
     	
-    	@PostMapping("/save-entry")
-    	public String saveEntry(@ModelAttribute("entry") JournalEntry entry) {
+	@PostMapping("/save-entry")
+	public String saveEntry(@ModelAttribute("entry") JournalEntry entry) {
 
-    	    //journalRepository.save(entry);
+	    logger.info("Entering JournalEntryController.saveEntry()");
 
-    	    return "redirect:/viewentries";
-    	}
-    }
+	    try {
+
+	        logger.info("Exiting JournalEntryController.saveEntry()");
+
+	        return "redirect:/viewentries";
+
+	    } catch(Exception e) {
+
+	        logger.error("Error saving journal entry", e);
+
+	        throw e;
+	    }
+	}
+}
     
     	
     	
