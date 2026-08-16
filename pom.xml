@@ -65,6 +65,8 @@
 		</dependency>
 	</dependencies>
 
+	<!-- Reviewed dependencies using VS Code for the Web-->
+
 	<build>
 		<plugins>
 			<plugin>
