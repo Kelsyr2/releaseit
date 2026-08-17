@@ -15,8 +15,8 @@ public class JournalEntryController
 	private static final Logger logger =
 	        LoggerFactory.getLogger(JournalEntryController.class);
 	
-	//@Autowired
-	//private JournalRepository journalRepository;
+	@Autowired
+	private JournalRepository journalRepository;
 	//Show new entry form
 	@GetMapping("/new-entry")
 	public String showNewEntryForm(Model model)
@@ -31,10 +31,11 @@ public class JournalEntryController
 	    return "newentry";
 	}
 	@GetMapping("/viewentries")
-	public String showViewEntries()
-	{
+	public String showViewEntries(Model model) {
 
 	    logger.info("Entering JournalEntryController.showViewEntries()");
+
+	    model.addAttribute("entries", journalRepository.findAll());
 
 	    logger.info("Exiting JournalEntryController.showViewEntries()");
 
@@ -47,9 +48,13 @@ public class JournalEntryController
 	    logger.info("Entering JournalEntryController.saveEntry()");
 
 	    try {
+	        journalRepository.save(entry);
+
+	        logger.info("Journal entry saved successfully");
 
 	        logger.info("Exiting JournalEntryController.saveEntry()");
-
+	        
+	        journalRepository.save(entry);
 	        return "redirect:/viewentries";
 
 	    } catch(Exception e) {
